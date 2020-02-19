@@ -1,0 +1,30 @@
+
+.clear{
+    clear:both;
+    margin-top: 20px;
+}
+
+#searchResult{
+    list-style: none;
+    padding: 0px;
+    width: 450px;
+    position: absolute;
+    margin: 0;
+}
+
+#searchResult li{
+    background: lavender;
+    padding: 4px;
+    margin-bottom: 1px;
+}
+
+
+#searchResult li:hover{
+    cursor: pointer;
+}
+
+input[type=text]{
+    padding: 5px;
+    width: 450px;
+    letter-spacing: 1px;
+}
