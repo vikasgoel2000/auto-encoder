@@ -61,7 +61,7 @@
                                 //var id = response[i]['id'];
                                 var name = response[i]['fields']['concept_name'];
                                 var domain_id = response[i]['fields']['domain_id'];
-                                var concept_code =response[i]['fields']['concept_code'];
+                                var concept_code = ~~response[i]['fields']['concept_code'];
                                 var count_words =response[i]['fields']['count_words']; 
                                 var freq =response[i]['fields']['freq'];
                                 //$("#searchResult").append("<li id='auto_result"+i+"' value='"+id+"'>"+name+"</li>");
