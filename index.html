@@ -24,8 +24,9 @@
 					function ($0, $1) {
 						return $1 ? '' : '+';
 					}).toLowerCase();
+			var test = '{fields:['concept_name^2']}'
                     $.ajax({
-                        url: 'https://t8zw3470y0.execute-api.us-east-1.amazonaws.com/prod_search?q=' + search + '~1&q.parser=lucene&size=20&return=_all_fields',
+                        url: 'https://t8zw3470y0.execute-api.us-east-1.amazonaws.com/prod_search?q=' + search + '~1&q.parser=lucene&size=20&q.options=' + test + '&return=_all_fields',
                         type: 'get',
                         dataType: 'json',
                         success:function(response){
