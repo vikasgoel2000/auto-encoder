@@ -25,7 +25,7 @@
 						return $1 ? '' : '+';
 					}).toLowerCase();
                     $.ajax({
-                        url: 'https://search-correct-snomed-16feb-qspx23bjamn5mtwrp5lb7idzy4.us-east-1.cloudsearch.amazonaws.com//2013-01-01/search?q=' + search + '~&size=10&q.options={fields:[%27concept_name^2%27]}&return=_all_fields',
+                        url: 'https://t8zw3470y0.execute-api.us-east-1.amazonaws.com/prod_search?q=' + search + '~1&q.parser=simple&size=20&return=_all_fields',
                         type: 'get',
                         dataType: 'json',
                         success:function(response){
