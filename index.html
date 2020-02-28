@@ -22,7 +22,7 @@
 
                     search = search.replace(/(^\s+|\s+$)|\s/g,
 					function ($0, $1) {
-						return $1 ? '' : '+';
+						return $1 ? '' : ' ';
 					}).toLowerCase();
 			
                     $.ajax({
