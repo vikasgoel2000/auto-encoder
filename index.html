@@ -26,7 +26,7 @@
 					}).toLowerCase();
 			
                     $.ajax({
-                        url: ' https://p3u386t1v8.execute-api.us-east-1.amazonaws.com/prod-search?q=' + search + '~1&q.parser=lucene&size=10&q.options=%7Bfields%3A%5B%27concept_name%5E2%27%2C%27syn_1%5E0.5%27%2C%27syn_2%5E0.5%27%2C%27syn_3%5E0.5%27%2C%27syn_4%5E0.5%27%2C%27syn_5%5E0.5%27%2C%27syn_6%5E0.5%27%2C%27syn_7%5E0.5%27%2C%27syn_8%5E0.5%27%2C%27syn_9%5E0.5%27%2C%27syn_10%5E0.5%27%2C%27syn_11%5E0.5%27%2C%27syn_12%5E0.5%27%2C%27syn_13%5E0.5%27%2C%27syn_14%5E0.5%27%2C%27syn_15%5E0.5%27%2C%27syn_16%5E0.5%27%2C%27syn_17%5E0.5%27%2C%27syn_18%5E0.5%27%2C%27syn_19%5E0.5%27%2C%27syn_20%5E0.5%27%2C%27syn_21%5E0.5%27%2C%27syn_22%5E0.5%27%2C%27syn_23%5E0.5%27%2C%27syn_24%5E0.5%27%2C%27syn_25%5E0.5%27%2C%27syn_26%5E0.5%27%2C%27syn_27%5E0.5%27%2C%27syn_28%5E0.5%27%2C%27syn_29%5E0.5%27%2C%27syn_30%5E0.5%27%2C%27syn_31%5E0.5%27%2C%27syn_32%5E0.5%27%2C%27syn_33%5E0.5%27%5D%7D%0A&return=_all_fields',
+                        url: ' https://p3u386t1v8.execute-api.us-east-1.amazonaws.com/prod-search?q='+ search +'~1&q.parser=lucene&size=10&return=_all_fields',
                         type: 'get',
                         dataType: 'json',
                         success:function(response){
