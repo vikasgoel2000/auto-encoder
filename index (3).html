@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+    <title>Auto Encoder POC</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="jquery-3.3.1.js" type="text/javascript"></script>
+	<div class="logo">
+    <p><img src="https://raw.githubusercontent.com/vikasgoel2000/auto-encoder/master/bdm.jpg" alt="" width="70" height="70"><font color="blue" size="20">BuddhiMed Technologies</font></p>
+<div>
+
+<p><font color="red" size="5"> Auto Encoder POC </font></p>
+
+<p>Note: This tool will help you find the best SNOMED Name and Code (Procedures/ Condition) based on the text entered</p> 
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            $("#txt_search").keyup(function(){
+                var search = $(this).val();
+
+                if(search != ""){
+
+                    search = search.replace(/(^\s+|\s+$)|\s/g,
+					function ($0, $1) {
+						return $1 ? '' : '+';
+					}).toLowerCase();
+			
+                    $.ajax({
+                        url: ' https://p3u386t1v8.execute-api.us-east-1.amazonaws.com/prod-search?q=' + search + '~1&q.parser=lucene&size=10&q.options=%7Bfields%3A%5B%27concept_name%5E2%27%2C%27syn_1%5E0.5%27%2C%27syn_2%5E0.5%27%2C%27syn_3%5E0.5%27%2C%27syn_4%5E0.5%27%2C%27syn_5%5E0.5%27%2C%27syn_6%5E0.5%27%2C%27syn_7%5E0.5%27%2C%27syn_8%5E0.5%27%2C%27syn_9%5E0.5%27%2C%27syn_10%5E0.5%27%2C%27syn_11%5E0.5%27%2C%27syn_12%5E0.5%27%2C%27syn_13%5E0.5%27%2C%27syn_14%5E0.5%27%2C%27syn_15%5E0.5%27%2C%27syn_16%5E0.5%27%2C%27syn_17%5E0.5%27%2C%27syn_18%5E0.5%27%2C%27syn_19%5E0.5%27%2C%27syn_20%5E0.5%27%2C%27syn_21%5E0.5%27%2C%27syn_22%5E0.5%27%2C%27syn_23%5E0.5%27%2C%27syn_24%5E0.5%27%2C%27syn_25%5E0.5%27%2C%27syn_26%5E0.5%27%2C%27syn_27%5E0.5%27%2C%27syn_28%5E0.5%27%2C%27syn_29%5E0.5%27%2C%27syn_30%5E0.5%27%2C%27syn_31%5E0.5%27%2C%27syn_32%5E0.5%27%2C%27syn_33%5E0.5%27%5D%7D%0A&return=_all_fields',
+                        type: 'get',
+                        dataType: 'json',
+                        success:function(response){
+                            response = response.hits.hit;
+                            console.log(response);
+                            var len = response.length;
+                            $("#searchResult").empty();
+                            for( var i = 0; i<len; i++){
+                                //var id = response[i]['id'];
+                                var name = response[i]['fields']['concept_name'];
+                                var domain_id = response[i]['fields']['domain_id'];
+                                var concept_code = ~~response[i]['fields']['concept_code'];
+                                var icd =response[i]['fields']['icd']; 
+                                var concept_id =response[i]['fields']['f__concept_id'];
+                                //$("#searchResult").append("<li id='auto_result"+i+"' value='"+id+"'>"+name+"</li>");
+                                $("#searchResult").append("<li id='auto_result"+i+"' value='"+icd+"#"+domain_id+"#"+concept_code+"#"+concept_id+"'>"+name+"</li>");
+                 
+
+                            }
+
+                            // binding click event to li
+                            $("#searchResult li").bind("click",function(){
+                                setText(this);
+                            });
+
+
+                        }
+                    });
+                }
+
+            });
+
+
+        });
+
+
+        function setText(element){
+          //console.log(element);
+
+          var data = $(element).attr('value');
+          var value = $(element).text();
+          var res_data = data.split("#");
+          //console.log(res_data);
+
+
+           document.getElementById("demo").innerHTML="Concept Nameame : " +value;
+           document.getElementById("demo1").innerHTML="ICD : " +res_data[0];
+           document.getElementById("demo2").innerHTML="Domain Id : " +res_data[1];
+           document.getElementById("demo3").innerHTML="Concept Code : " +res_data[2];
+           document.getElementById("demo4").innerHTML="Concept Id : " +res_data[3];
+
+            $("#txt_search").val(value);
+            $("#searchResult").empty();
+
+        }
+
+    </script>
+</head>
+<body>
+    </br>
+    <b><div>Enter Keyword to Search SNOMED</div></br></b>
+    <div>
+        
+        <input type="text" id="txt_search" name="txt_search">
+    </div>
+    <ul id="searchResult"></ul>
+
+    <div class="clear"></div>
+    <div id="userDetail"></div>
+ <p id="demo"  style="margin-left: 540px;"></p>
+ <p id="demo1"  style="margin-left: 540px;"></p>
+ <p id="demo2"  style="margin-left: 540px;"></p>
+ <p id="demo3"  style="margin-left: 540px;"></p>
+ <p id="demo4"  style="margin-left: 540px;"></p>
+
+
+</body>
+</html>
